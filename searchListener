@@ -1,0 +1,13 @@
+import java.awt.*;       // dimensions
+import java.awt.event.*; // action listener interface
+import javax.swing.*;    // GUI components
+
+public class SearchListener implements ActionListener {
+
+   public void ActionPerformed(Event search){
+   //search for data
+   //find
+   //return a window of found data
+   }
+   
+} // SearchListener
