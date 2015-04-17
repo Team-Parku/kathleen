@@ -1,0 +1,58 @@
+/*****************
+AUTHOR: Kathleen
+GUI:    EDIT + DEL 
+DUE:    16 APR 2015
+******************/
+
+import java.util.*;
+                          /* GUI imports:     */
+import javax.swing.*;     /* GUI components   */
+import java.awt.*;        /* for Dimension    */
+import java.awt.event.*;  /* Action Listeners */
+
+
+/* ActionListener for EDIT BUTTON  */
+public class LoginGUI {
+
+   private JFrame frame;
+   private JButton edit;
+                                                                /* Constructor  */
+   public LoginGUI() {
+   }
+                                                                /* Edit JFrame  */ 
+   public void editFrame() {
+      frame = new JFrame();
+      frame.setForeground(Color.WHITE);
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setLocation(new Point(10, 50));
+      frame.setSize(new Dimension(300, 120));
+      frame.setTitle("Main Window");  
+   }
+                                                                /* Edit JButton  */    
+   /* -construct button
+      -set properties
+      -add to frame        */
+   public void editButton() {
+   
+      edit = new JButton();
+      edit.setText("EDIT");
+      edit.setBackground(Color.ORANGE);
+      frame.add(edit);
+      
+      // action listener
+      edit.addActionListener(new EditListener());
+      // frame becomes visible
+      frame.setVisible(true);
+      
+   }
+                                                                /* Main          */   
+   public static void main(String[] args) {
+   
+      LoginGUI login = new LoginGUI();
+      // Edit
+      login.editFrame();
+      login.editButton(); 
+      
+   } // main   
+    
+} // loginGUI
