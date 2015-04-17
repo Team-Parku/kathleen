@@ -1,0 +1,82 @@
+import java.awt.*;       // dimensions
+import java.awt.event.*; // action listener interface
+import javax.swing.*;    // GUI components
+
+public class AttendanceListener implements ActionListener {
+   
+   private JTextField find;
+   private JTextField find2Replace;
+   private JButton search;
+   private JLabel tipLabel;
+   private JFrame frame;
+   private int count;
+   
+   // attendance action
+   public void actionPerformed(ActionEvent attendance){
+   // exit previous frame (maybe, or leave it open)
+   // open new frame: del, find, find&replace buttons / database space
+      attendanceWindow();
+      count++;
+      // checks / disposes duplicate clicks
+      if(count == 2){
+         System.out.println("Already exists");
+         frame.dispose();
+         frame = null;
+         count--;
+      }
+      System.out.println("count: " + count );
+   } 
+   
+   public void attendanceWindow(){
+   
+   // components
+      /* find should give options to delete after target found */
+      find = new JTextField(5);
+      find2Replace =new JTextField(5);
+      
+   // layout [north]
+      JPanel north = new JPanel(new GridLayout(2,3));
+      north.add(new JLabel("Find: "));
+      north.add(find);
+      north.add(new JButton("Go!"));
+      north.add(new JLabel("Find & Replace: "));
+      north.add(find2Replace);
+      north.add(new JButton("Go!"));
+   // layout [center]
+      JPanel center = new JPanel(new GridLayout(3,1));
+         // search button
+      //search.addActionListener(new searchListener());
+      tipLabel = new JLabel(
+         "The following categories will be searched or click the following categories for a more narrow search:");
+      JLabel dashes = new JLabel(
+         "-----------------------------------------------------------------------------------------------------------------------------------------------"); 
+      center.add(tipLabel);
+      center.add(dashes);  
+   // layout [south]      
+      JPanel south = new JPanel(new GridLayout(2,2));
+      south.add(new JButton("Paid Day Use"));
+      south.add(new JButton("Free Day Use"));
+      south.add(new JButton("Overnight"));
+      south.add(new JButton("Special Event"));
+   // overall frame
+      frame = new JFrame("Editing Attendance");
+      frame.setLayout(new BorderLayout());
+      frame.add(north, BorderLayout.NORTH);
+      frame.add(center, BorderLayout.CENTER);
+        // add attendance data frame south
+      frame.add(south, BorderLayout.SOUTH);
+      
+      frame.pack();
+      frame.setVisible(true);   
+     
+   } // attendanceWindow
+   
+ /* overrides exit button
+    does not terminate program
+    terminates only  the window  */
+   public void windowClosing(WindowEvent e) {
+      //frame.setVisible(false);
+      frame.dispose();
+   }
+   
+}  // attendanceListener
