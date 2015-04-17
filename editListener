@@ -1,0 +1,81 @@
+import java.awt.*;       // dimensions
+import java.awt.event.*; // action listener interface
+import javax.swing.*;    // GUI components
+
+public class EditListener implements ActionListener {
+
+   private JFrame frame;
+   private JButton attendance;
+   private JButton passes;
+   public int count;
+   public int closes;
+   // edit action
+   public void actionPerformed(ActionEvent edit){
+   
+   // exit previous frame (maybe, or leave it open)
+   // open new frame: 3 buttons and search box
+      editOptionWindow();
+      
+      count++;
+   
+      // checks / disposes duplicate clicks
+      if(count == 2){ // if double clicked
+         System.out.println("Already exists");
+         System.out.println("checked count: " + count);
+         frame.dispose();
+         frame = null;
+         count--;
+      }
+      
+      System.out.println("final count: " + count );
+      System.out.println("final closes: " + closes );
+      //JOptionPane.showMessageDialog(null, "You clicked edit's butt!");
+   } 
+   
+   public void editOptionWindow(){
+      
+      // frame
+      frame = new JFrame();
+      
+      frame.setForeground(Color.WHITE);
+      //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setLocation(new Point(10, 50));
+      //frame.setSize(new Dimension(300, 120));
+      frame.setTitle("Edit Options");
+      frame.setLayout(new FlowLayout());
+      
+      // attendance button
+      attendance = new JButton();
+      attendance.setText("Attendance");
+      attendance.setBackground(Color.BLUE);
+      frame.add(attendance);
+      // Action Listener
+      attendance.addActionListener(new AttendanceListener());   
+          
+      // passes button
+      passes = new JButton();
+      passes.setText("Passes");
+      passes.setBackground(Color.BLUE);
+      frame.add(passes);
+      // Action Listener
+      passes.addActionListener(new PassesListener());
+      //frame.addwindowClosing(
+      frame.pack(); /* resizes content to it for you */      
+      // make frame visible
+      frame.setVisible(true);   
+   } // editOptionWindow()
+   
+ /* overrides exit button
+    does not terminate program
+    terminates only  the window  */
+   public void windowClosing(WindowEvent e) {
+     
+      frame.dispose(); 
+      // doesnt work: wHYYY!!?!?!?!
+      if(frame.isDisplayable()==false){
+         closes = 1;
+      }
+      
+   }
+   
+} // EditListener
