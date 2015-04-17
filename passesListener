@@ -1,0 +1,76 @@
+import java.awt.*;       // dimensions
+import java.awt.event.*; // action listener interface
+import javax.swing.*;    // GUI components
+
+public class PassesListener implements ActionListener {
+   private JTextField find;
+   private JTextField find2Replace;
+   private JButton search;
+   private JLabel tipLabel;
+   private JFrame frame;
+   private int count;
+   
+   public void actionPerformed(ActionEvent passes) {
+     
+      passesWindow();
+      count++;
+      // checks / disposes duplicate clicks
+      if(count == 2){
+         System.out.println("Already exists");
+         frame.dispose();
+         count--;
+      }
+      System.out.println("count: " + count );
+   }
+ 
+   public void passesWindow() {
+   // components
+      /* find should give options to delete after target found */
+      find = new JTextField(5);
+      find2Replace =new JTextField(5);
+   
+   // layout [north]
+      JPanel north = new JPanel(new GridLayout(2,3));
+      north.add(new JLabel("Find: "));
+      north.add(find);
+      north.add(new JButton("Go"));
+      north.add(new JLabel("Find & Replace: "));
+      north.add(find2Replace);
+      north.add(new JButton("Go"));
+   // layout [center]
+      JPanel center = new JPanel(new GridLayout(3,1));
+      tipLabel = new JLabel(
+         "The following categories will be searched or click the following categories for a more narrow search:");
+   
+      JLabel dashes = new JLabel(
+         "-----------------------------------------------------------------------------------------------------------------------------------------------"); 
+      center.add(tipLabel);
+      center.add(dashes);  
+   // layout [south]      
+      JPanel south = new JPanel(new GridLayout(1,3));
+      south.add(new JButton("Paid Day"));
+      south.add(new JButton("Free Day"));
+      south.add(new JButton("Boat Pass"));
+     
+   // overall frame
+      frame = new JFrame("Editing Passes");
+      frame.setLayout(new BorderLayout());
+      frame.add(north, BorderLayout.NORTH);
+      frame.add(center, BorderLayout.CENTER);
+        // add attendance data frame south                HOW?!!?
+      frame.add(south, BorderLayout.SOUTH);
+      
+      frame.pack();
+      frame.setVisible(true);   
+     
+   } // passesWindow()  
+   
+ /* overrides exit button
+    does not terminate program
+    terminates only  the window  */
+   public void windowClosing(WindowEvent e) {
+      //frame.setVisible(false);
+      frame.dispose();
+   }
+   
+} // Passes Listener
